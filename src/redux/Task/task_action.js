@@ -1,0 +1,2 @@
+export const DATA_REQUESTED = "DATA_REQUESTED";
+export const DATA_RECEIVED = "DATA_RECEIVED";
