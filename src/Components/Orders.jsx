@@ -1,11 +1,5 @@
 import * as React from 'react';
-import Link from '@mui/material/Link';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Title from './Title';
+import { DataGrid } from '@mui/x-data-grid';
 
 // Generate Order Data
 function createData(id, storage, hard_disk, usb, graphic_card, weight, power, processor) {
@@ -114,44 +108,70 @@ const rows = [
     'Intel Core i5-6400 Processor',
   ),
 ];
-
-function preventDefault(event) {
-  event.preventDefault();
-}
+ // Storage	Hard Disk	USB	Graphic Card	Weight	Power	Processor
+const columns = [
+  { 
+    field: 'id', 
+    headerName: 'ID', 
+    width: 70 
+  },
+  { 
+    field: 'storage', 
+    headerName: 'Storage', 
+    sortable: true,
+    width: 90 
+  },
+  { 
+    field: 'hard_disk', 
+    headerName: 'Hard Disk',
+    sortable: true, 
+    width: 130 
+  },
+  {
+    field: 'usb',
+    headerName: 'USB',
+    sortable: true,
+    width: 120,
+  },
+  {
+    field: 'graphic_card',
+    headerName: 'Graphic Card',
+    sortable: true,
+    width: 160,
+  },
+  {
+    field: 'weight',
+    headerName: 'Weight',
+    sortable: true,
+    width: 90,
+  },
+  {
+    field: 'power',
+    headerName: 'Power',
+    sortable: true,
+    width: 100,
+  },
+  {
+    field: 'processor',
+    headerName: 'Processor',
+    sortable: true,
+    width: 100,
+  },
+];
 
 export default function Orders() {
   return (
-    <React.Fragment>
-      <Title>Developer Interview Task</Title>
-      <Table size="small">
-        <TableHead>
-          <TableRow>
-            <TableCell>Storage</TableCell>
-            <TableCell>Hard Disk</TableCell>
-            <TableCell>USB</TableCell>
-            <TableCell>Graphic Card</TableCell>
-            <TableCell>Weight</TableCell>
-            <TableCell>Power</TableCell>
-            <TableCell>Processor</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell>{row.storage}</TableCell>
-              <TableCell>{row.hard_disk}</TableCell>
-              <TableCell>{row.usb}</TableCell>
-              <TableCell>{row.graphic_card}</TableCell>
-              <TableCell>{row.weight}</TableCell>
-              <TableCell>{row.power}</TableCell>
-              <TableCell>{row.processor}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-      {/*<Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
-        See more orders
-        </Link>*/}
-    </React.Fragment>
+    <div style={{ height: 400, width: '100%' }}>
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        initialState={{
+          pagination: {
+            paginationModel: { page: 0, pageSize: 5 },
+          },
+        }}
+        pageSizeOptions={[5, 10]}
+      />
+    </div>
   );
 }
